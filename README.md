@@ -3,6 +3,10 @@
 todo: change api calls from openai to bedrock
 need to use aws sdk for javascript v3
 use bedrock runtime client
+
+npm install @aws-sdk/client-bedrock-runtime
+InvokeModelCommand
+InvokeModelWithResponseStreamCommand
 https://www.youtube.com/watch?v=ab1mbj0acDo
 
 deploy node.js on ec2: https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/setting-up-node-on-ec2-instance.html
