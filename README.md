@@ -1,6 +1,9 @@
 # Generate dad jokes using AWS Bedrock AI
 
 todo: change api calls from openai to bedrock
+need to use aws sdk for javascript v3
+use bedrock runtime client
+https://www.youtube.com/watch?v=ab1mbj0acDo
 
 deploy node.js on ec2: https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/setting-up-node-on-ec2-instance.html
 use vue.js lifecycle hooks async created() to make api request to partner microservice to fill in the input form default text:
