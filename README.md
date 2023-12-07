@@ -4,8 +4,9 @@ todo: change api calls from openai to bedrock
 need to use aws sdk for javascript v3
 use bedrock runtime client
 
-cli testing
-aws bedrock-runtime invoke-model --model-id amazon.titan-text-express-v1 --body '{"inputText": "User: tell a dad joke about cats at a wedding", "textGenerationConfig": {"temperature": 0.9, "topP": 0.9, "maxTokenCount": 1000}}' --cli-binary-format raw-in-base64-out joke.txt
+cli testing with llama 2
+aws bedrock-runtime invoke-model --model-id meta.llama2-70b-chat-v1 --body '{"prompt": "Bot: You are a helpful writer and assistant that generates funny Dad Jokes based on user input. Only respond with the joke. Do not say <hello> or <S
+ure> or ask me if I want another joke. User: Write a dad joke about cats at a wedding.", "temperature": 0.9, "top_p": 0.9, "max_gen_len": 1000}' --cli-binary-format raw-in-base64-out joke.txt
 
 npm install @aws-sdk/client-bedrock-runtime
 InvokeModelCommand
