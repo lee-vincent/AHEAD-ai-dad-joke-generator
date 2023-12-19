@@ -32,7 +32,7 @@ export default defineEventHandler(async (event) => {
   const { OPENAI_API_KEY } = JSON.parse(response.SecretString);
 
   const body = await readBody(event);
-  const agent = body.agent || "twitterAgent";
+  const agent = body.agent || "jokeAgent";
 
   if (!Object.keys(agents).includes(agent)) {
     throw new Error(`${agent} doesn't exist`);

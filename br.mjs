@@ -6,7 +6,7 @@ import { BedrockRuntimeClient, InvokeModelCommand } from "@aws-sdk/client-bedroc
 
 const client = new BedrockRuntimeClient();
 const input = { // InvokeModelRequest
-    body: '{"prompt": "Bot: You are a helpful writer and assistant that generates funny Dad Jokes based on user input. Only respond with the joke. Do not say or or ask me if I want another joke. User: Write a dad joke about cats at a wedding.", "temperature": 0.9, "top_p": 0.9, "max_gen_len": 1000}', // required
+    body: '{"prompt": "[INST]You are a helpful writer and assistant that generates funny Dad Jokes based on user input. Only respond with the joke. Do not say or or ask me if I want another joke. Here are two examples. Example 1- User: Write a dad joke about cats at a wedding. Bot: Why did the cat go to the wedding? To get meow-ied! Example 2- User: atoms Bot: Why cant you trust atoms? Because they make up everything![/INST]/write a dad joke about cats.", "temperature": 1.0, "top_p": 0.9, "max_gen_len": 1000}',
     contentType: "application/json",
     accept: "application/json",
     modelId: "meta.llama2-70b-chat-v1", // required
