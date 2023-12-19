@@ -5,8 +5,7 @@ need to use aws sdk for javascript v3
 use bedrock runtime client
 
 cli testing with llama 2
-aws bedrock-runtime invoke-model --model-id meta.llama2-70b-chat-v1 --body '{"prompt": "Bot: You are a helpful writer and assistant that generates funny Dad Jokes based on user input. Only respond with the joke. Do not say <hello> or <S
-ure> or ask me if I want another joke. User: Write a dad joke about cats at a wedding.", "temperature": 0.9, "top_p": 0.9, "max_gen_len": 1000}' --cli-binary-format raw-in-base64-out joke.txt
+aws bedrock-runtime invoke-model --model-id meta.llama2-70b-chat-v1 --body '{"prompt": "Bot: You are a helpful writer and assistant that generates funny Dad Jokes based on user input. Only respond with the joke. Do not say <hello> or <Sure> or ask me if I want another joke. User: Write a dad joke about cats at a wedding.", "temperature": 0.9, "top_p": 0.9, "max_gen_len": 1000}' --cli-binary-format raw-in-base64-out joke.txt
 
 npm install @aws-sdk/client-bedrock-runtime
 InvokeModelCommand

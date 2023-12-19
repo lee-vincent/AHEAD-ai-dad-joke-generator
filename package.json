@@ -14,8 +14,10 @@
     "rollup": "3.18.0"
   },
   "dependencies": {
+    "@aws-sdk/client-bedrock-runtime": "^3.476.0",
     "@aws-sdk/client-secrets-manager": "^3.441.0",
     "@nuxtjs/tailwindcss": "^6.6.4",
+    "@smithy/util-stream": "^2.0.23",
     "@vueuse/nuxt": "^9.13.0",
     "daisyui": "^2.51.5",
     "nanoid": "^4.0.1",
