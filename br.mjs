@@ -1,8 +1,5 @@
 import { BedrockRuntimeClient, InvokeModelCommand } from "@aws-sdk/client-bedrock-runtime"; // ES Modules import
-// import { Uint8ArrayBlobAdapter } from "@smithy/util-stream"
-// const { BedrockRuntimeClient, InvokeModelCommand } = require("@aws-sdk/client-bedrock-runtime"); // CommonJS import
-// const client = new BedrockRuntimeClient(config);
-// const converter = new Uint8ArrayBlobAdapter;
+
 
 const client = new BedrockRuntimeClient();
 const input = { // InvokeModelRequest
@@ -11,7 +8,10 @@ const input = { // InvokeModelRequest
     accept: "application/json",
     modelId: "meta.llama2-70b-chat-v1", // required
 };
+
+
 const command = new InvokeModelCommand(input);
 const response = await client.send(command);
-console.log(response.body.transformToString())
+
+console.log(JSON.parse(response.body.transformToString()).generation)
 
