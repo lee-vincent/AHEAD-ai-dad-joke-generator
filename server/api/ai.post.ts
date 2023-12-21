@@ -46,7 +46,6 @@ export default defineEventHandler(async (event) => {
 
   const completion = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
-    // messages: [{ role: "user", content: "Send me any 5 digit prime number." }],
     messages: body.messages || [],
     temperature: body.temperature || 0.7,
     // @ts-expect-error checking above if agent exists
