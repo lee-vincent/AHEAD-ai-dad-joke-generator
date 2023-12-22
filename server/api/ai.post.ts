@@ -32,6 +32,10 @@ export default defineEventHandler(async (event) => {
   // }
 
   const body = await readBody(event);
+  console.log("body ", body)
+  body.messages.pop() // discard the last element because it is captured in topic and we havent sent it to API before
+  console.log("body.messages ", body.messages)
+  
 
   const _AnthropicBedrockClient = new AnthropicBedrock({
       // awsAccessKey: _awsAccessKey,
@@ -51,20 +55,14 @@ export default defineEventHandler(async (event) => {
     - Only respond with the dad joke. Do not say extra things like "Sure, here's a dad joke" or "Here's one for you"
     - Similar or identical user input should result in a unique dad joke.
     Here is a list of user inputs and dad jokes you've written before:
-    input: cats
-    you: What do cats like to eat for breakfast? Mice Krispies!
-    input: cats
-    you: What do you call a cat who always lands on its feet? An acrocat!
-    input: cats
-    you: Why can't cats work on computers? They get too distracted chasing the mouse!
-    input: pumpkins
-    you: Why do pumpkins sit on people's porches? They have no hands to knock!
-    input: pumpkins
-    you: Why couldn't the pumpkin fit through the door? It was too gourd!
-    ${AnthropicBedrock.HUMAN_PROMPT} pumpkins ${AnthropicBedrock.AI_PROMPT}`,
+    ${body.messages}
+    ${AnthropicBedrock.HUMAN_PROMPT} ${body.topic} ${AnthropicBedrock.AI_PROMPT}`,
   });
   
-  console.log(completion.completion)
+  console.log("completion.completion ", completion.completion)
   return completion.completion
 
 });
+
+
+// when you return completion must add to messages

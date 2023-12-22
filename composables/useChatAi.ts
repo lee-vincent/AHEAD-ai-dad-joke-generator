@@ -1,4 +1,4 @@
-import type { Message, AsyncState } from "@/types";
+import type { AsyncState } from "@/types";
 
 export const useChatAi = () => {
   const state = ref<AsyncState>(null);
@@ -8,7 +8,6 @@ export const useChatAi = () => {
   const generatedJoke = computed(() => res.value);
 
   interface ChatOptions {
-    messages: Message[];
     topic: string,
     temperature: number
 
@@ -17,7 +16,7 @@ export const useChatAi = () => {
   async function chat(options: ChatOptions) {
     try {
       state.value = "loading";
-      console.log({...options})
+      console.log("options ", {...options})
 
       const result = await fetchWithTimeout<string>(
         `/api/ai`,

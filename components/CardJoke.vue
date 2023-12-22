@@ -1,23 +1,27 @@
 <script setup lang="ts">
-	import type { Message } from "~~/types";
 	const props = defineProps<{
-		messages: Message[];
+		messages: string[];
 		topic: string;
 		temperature: number;
 	}>();
+	const emit = defineEmits(["update-messages"]);
 	const { chat, state, generatedJoke } = useChatAi();
 	const jokeText = computed(() => generatedJoke.value);
-	const generate = () => nextTick(() => chat(props));
+	// const generate = () => nextTick(() => chat(props));
+	const generate = async () => {
+		await nextTick(() => chat(props));
+		emit("update-messages", `you responded: ${jokeText.value}`);
+	};
 	defineExpose({
 		generate,
 	});
 </script>
 <template>
 	<CardGeneric title="Dad Joke" :state="state" :body="jokeText" class="mb-10">
-		<div class="flex w-full justify-between items-center">
+		<!-- <div class="flex w-full justify-between items-center">
 			<div>
 				<button class="btn btn-neutral" @click="generate()">Regenerate</button>
 			</div>
-		</div>
+		</div> -->
 	</CardGeneric>
 </template>
