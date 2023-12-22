@@ -1,5 +1,7 @@
 # Generate dad jokes using AWS Bedrock AI with Anthropic's Claude
 
+## https://dadjokes.vinnielee.com
+
 EC2 instructions:
 wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
 source .bashrc
