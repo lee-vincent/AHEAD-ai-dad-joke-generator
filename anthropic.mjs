@@ -47,6 +47,8 @@ async function main() {
     //     stop: '\n\nHuman:'
     // }
     console.log(completion.completion)
+    console.log("break")
+    console.log(`${AnthropicBedrock.HUMAN_PROMPT}${msg}`)
 }
 main().catch(console.error);
 

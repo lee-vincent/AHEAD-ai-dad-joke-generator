@@ -1,17 +1,10 @@
 <script setup lang="ts">
 	import type { Message } from "~~/types";
 	const messages = ref<Message[]>([]);
-	const messagesForApi = computed(
-		() =>
-			messages.value
-				.map((m) => ({
-					role: m.userId,
-					content: m.text,
-				}))
-				.slice(-50) // finish_reason: "length"
-	);
+	const messagesForApi = computed(() => messages.value);
 
 	const form = ref({
+		messages: [],
 		topic: "",
 		temperature: 1,
 	});
@@ -23,8 +16,7 @@
 		form.value = { ...e };
 		if (!form.value.topic) return;
 		const msg = {
-			userId: "human",
-			text: form.value.topic,
+			text: `input: ${form.value.topic}`,
 		};
 		messages.value.push(msg);
 		jokeCard.value.generate();

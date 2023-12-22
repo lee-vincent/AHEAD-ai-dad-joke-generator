@@ -1,34 +1,35 @@
-import type { Agent } from "@/agents";
-import type { AsyncState } from "@/types";
-import type { CreateChatCompletionResponse } from "openai";
+import type { Message, AsyncState } from "@/types";
 
-export const useChatAi = ({ agent }: { agent: Agent }) => {
+export const useChatAi = () => {
   const state = ref<AsyncState>(null);
   const error = ref();
-  const res = ref<CreateChatCompletionResponse>();
+  const res = ref<string>();
 
-  const usage = computed(() => res.value?.usage);
-  const choices = computed(() => res.value?.choices || []);
-  const hasChoices = computed(() => choices.value.length);
-  const firstChoice = computed(() => choices.value.at(0));
-  const firstMessage = computed(() => firstChoice.value?.message);
+  const generatedJoke = computed(() => res.value);
 
-  async function chat(options: Record<string, any>) {
+  interface ChatOptions {
+    messages: Message[];
+    topic: string,
+    temperature: number
+
+}
+
+  async function chat(options: ChatOptions) {
     try {
       state.value = "loading";
       console.log({...options})
 
-      const result = await fetchWithTimeout<CreateChatCompletionResponse>(
+      const result = await fetchWithTimeout<string>(
         `/api/ai`,
         {
           method: "POST",
           body: {
             ...options,
-            agent: `${agent}Agent`,
           },
         }
       );
-      if (!result.choices || !result.usage) {
+      
+      if (!result) {
         throw new Error("Invalid AI response");
       }
 
@@ -44,11 +45,7 @@ export const useChatAi = ({ agent }: { agent: Agent }) => {
   return {
     state,
     chat,
-    choices,
-    usage,
-    firstChoice,
-    hasChoices,
-    firstMessage,
+    generatedJoke,
     res,
   };
 };
