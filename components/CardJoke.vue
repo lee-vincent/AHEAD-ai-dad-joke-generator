@@ -18,10 +18,5 @@
 </script>
 <template>
 	<CardGeneric title="Dad Joke" :state="state" :body="jokeText" class="mb-10">
-		<!-- <div class="flex w-full justify-between items-center">
-			<div>
-				<button class="btn btn-neutral" @click="generate()">Regenerate</button>
-			</div>
-		</div> -->
 	</CardGeneric>
 </template>

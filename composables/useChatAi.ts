@@ -16,7 +16,7 @@ export const useChatAi = () => {
   async function chat(options: ChatOptions) {
     try {
       state.value = "loading";
-      console.log("options ", {...options})
+      // console.log("options ", {...options})
 
       const result = await fetchWithTimeout<string>(
         `/api/ai`,

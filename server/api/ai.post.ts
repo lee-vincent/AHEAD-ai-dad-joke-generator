@@ -2,45 +2,45 @@ import AnthropicBedrock from '@anthropic-ai/bedrock-sdk';
 import { SecretsManagerClient, GetSecretValueCommand } from "@aws-sdk/client-secrets-manager";
 
 export default defineEventHandler(async (event) => {
-  // const awsAccessKey_secret_name = "AHEAD-ai-dad-joke-app-awsAccessKey";
-  // const awsSecretKey_secret_name = "AHEAD-ai-dad-joke-app-awsSecretKey";
+  const awsAccessKey_secret_name = "AHEAD-ai-dad-joke-app-awsAccessKey";
+  const awsSecretKey_secret_name = "AHEAD-ai-dad-joke-app-awsSecretKey";
 
-  // const _SecretsManagerClient = new SecretsManagerClient({
-  //   region: "us-east-1",
-  // });
+  const _SecretsManagerClient = new SecretsManagerClient({
+    region: "us-east-1",
+  });
 
-  // let _awsAccessKey;
-  // let _awsSecretKey
+  let _awsAccessKey;
+  let _awsSecretKey
 
-  // try {
-  //   _awsAccessKey = await _SecretsManagerClient.send(
-  //     new GetSecretValueCommand({
-  //       SecretId: awsAccessKey_secret_name,
-  //       VersionStage: "AWSCURRENT", // VersionStage defaults to AWSCURRENT if unspecified
-  //     })
-  //   );
-  //   _awsSecretKey = await _SecretsManagerClient.send(
-  //     new GetSecretValueCommand({
-  //       SecretId: awsSecretKey_secret_name,
-  //       VersionStage: "AWSCURRENT", // VersionStage defaults to AWSCURRENT if unspecified
-  //     })
-  //   );
-  // } catch (error) {
-  //   // For a list of exceptions thrown, see
-  //   // https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
-  //   throw error;
-  // }
+  try {
+    _awsAccessKey = await _SecretsManagerClient.send(
+      new GetSecretValueCommand({
+        SecretId: awsAccessKey_secret_name,
+        VersionStage: "AWSCURRENT", // VersionStage defaults to AWSCURRENT if unspecified
+      })
+    );
+    _awsSecretKey = await _SecretsManagerClient.send(
+      new GetSecretValueCommand({
+        SecretId: awsSecretKey_secret_name,
+        VersionStage: "AWSCURRENT", // VersionStage defaults to AWSCURRENT if unspecified
+      })
+    );
+  } catch (error) {
+    // For a list of exceptions thrown, see
+    // https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
+    throw error;
+  }
 
   const body = await readBody(event);
-  console.log("body ", body)
+  // console.log("body ", body)
   body.messages.pop() // discard the last element because it is captured in topic and we havent sent it to API before
-  console.log("body.messages ", body.messages)
+  // console.log("body.messages ", body.messages)
   
 
   const _AnthropicBedrockClient = new AnthropicBedrock({
-      // awsAccessKey: _awsAccessKey,
-      // awsSecretKey: _awsSecretKey,
-      // awsRegion: 'us-east-1',
+      awsAccessKey: _awsAccessKey.SecretString,
+      awsSecretKey: _awsSecretKey.SecretString,
+      awsRegion: 'us-east-1',
   });
 
   const completion = await _AnthropicBedrockClient.completions.create({
@@ -59,7 +59,7 @@ export default defineEventHandler(async (event) => {
     ${AnthropicBedrock.HUMAN_PROMPT} ${body.topic} ${AnthropicBedrock.AI_PROMPT}`,
   });
   
-  console.log("completion.completion ", completion.completion)
+  // console.log("completion.completion ", completion.completion)
   return completion.completion
 
 });
