@@ -31,6 +31,15 @@ export default defineEventHandler(async (event) => {
     throw error;
   }
 
+    // @ts-expect-error
+  const { AWS_ACCESS_KEY } = JSON.parse(_awsAccessKey.SecretString);
+    // @ts-expect-error
+  const { AWS_SECRET_KEY } = JSON.parse(_awsSecretKey.SecretString);
+  // console.log("AWS_ACCESS_KEY ", AWS_ACCESS_KEY)
+  // console.log("AWS_SECRET_KEY ", AWS_SECRET_KEY)
+
+
+
   const body = await readBody(event);
   // console.log("body ", body)
   body.messages.pop() // discard the last element because it is captured in topic and we havent sent it to API before
@@ -38,8 +47,8 @@ export default defineEventHandler(async (event) => {
   
 
   const _AnthropicBedrockClient = new AnthropicBedrock({
-      awsAccessKey: _awsAccessKey.SecretString,
-      awsSecretKey: _awsSecretKey.SecretString,
+      awsAccessKey: AWS_ACCESS_KEY,
+      awsSecretKey: AWS_SECRET_KEY,
       awsRegion: 'us-east-1',
   });
 
