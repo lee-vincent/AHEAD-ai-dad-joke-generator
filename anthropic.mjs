@@ -41,6 +41,16 @@ async function main() {
         you: Why couldn't the pumpkin fit through the door? It was too gourd!
         ${AnthropicBedrock.HUMAN_PROMPT} ${msg} ${AnthropicBedrock.AI_PROMPT}`,
     });
+    // {
+    //     completion: " Why don't pumpkins make good storytellers? They always exaggerate and tell tall tales!",
+    //     stop_reason: 'stop_sequence',
+    //     stop: '\n\nHuman:'
+    // }
     console.log(completion.completion)
 }
 main().catch(console.error);
+
+
+// <jokes>
+//     {{ previous jokes }}
+// </jokes>

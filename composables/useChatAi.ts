@@ -16,6 +16,7 @@ export const useChatAi = ({ agent }: { agent: Agent }) => {
   async function chat(options: Record<string, any>) {
     try {
       state.value = "loading";
+      console.log({...options})
 
       const result = await fetchWithTimeout<CreateChatCompletionResponse>(
         `/api/ai`,

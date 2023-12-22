@@ -10,7 +10,7 @@ export const jokeAgent = createAgent((context) => {
       },
       {
         role: "user",
-        content: `Create a dad joke about ${context.url}.`,
+        content: `Create a dad joke about ${context.topic}.`,
       },
     ],
     max_tokens: 350,

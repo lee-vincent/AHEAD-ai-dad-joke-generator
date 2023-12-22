@@ -1,6 +1,6 @@
 <script setup lang="ts">
 	const props = defineProps<{
-		url: string;
+		topic: string;
 		temperature: number;
 	}>();
 	const { chat, state, firstMessage } = useChatAi({ agent: "joke" });
