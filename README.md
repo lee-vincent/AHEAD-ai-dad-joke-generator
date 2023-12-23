@@ -8,7 +8,10 @@ source .bashrc
 nvm install 18 --lts
 wsl: tar cf dad-joke.tar ./ai-chatbot
 wsl: scp -i ~/.ssh/bastion ./dad-joke.tar ec2-user@52.207.210.115:/home/ec2-user
-tar xf dad-joke.tar
+tar xf dad-joke-app.tar
+cd .output
+npm install
+node ./server/index.mjs
 cd ai-chatbot
 nvm use 18
 npm install
